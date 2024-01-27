@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+   <head>
+    <!-- 导入页面的基本样式 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" /> 
+    <script rel="stylesheet" src="../static/css/upload.css"></script>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/upload.css') }}">
+      <title>图片搜索-鼠马商城</title>
+   </head>
+   <body>
+      <div class="container">
+      <h1>图片搜索</h1>
+      <form action = "/uploader" method = "POST" 
+         enctype = "multipart/form-data">
+         <input class="file" type = "file" name = "file" />
+         <input class="submit" type = "submit"/>
+      </form>    
+      </div>  
+   </body>
+</html>

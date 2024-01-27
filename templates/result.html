@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 导入页面的基本样式 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" /> 
+    <script rel="stylesheet" src="../static/css/result.css"></script>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/result.css') }}">
+    <!-- 导入 jQuery -->
+    <script src="../static/js/jquery.js"></script>
+    <!-- <script src="url_for('static',filename='js/jquery.js')"></script> -->
+    <link href="{{ url_for('static',filename='../../../static/js/jquery.js') }}">
+    <!-- 导入 template 模板 -->
+    <link href="{{ url_for('static',filename='../../../static/js/template-web.js') }}">
+    <script src="../static/js/template-web.js"></script>
+    <!-- <script src="url_for('static',filename='js/template-web.js')"></script> -->
+        <title>{{ keyword }} - 商品搜索</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="Box">
+            <div class="homepage">
+                <div class="title"><img src="../static/img/title-col.png"></div>
+                <form action="/search/page=1" method="get">
+                    <!-- 条件区域 -->
+                    <div class="condition-container">
+                    <div class='condition' id="brands">
+                    <span><b>品牌：</b></span>
+                    {%for i in brands%} 
+                    <td> <input type='checkbox' name="{{i}}"><img class="brand" src="../static/img/{{ i }}.jpg" title="{{ i }}"></td>
+                    {%endfor%}
+                    </div>
+                   
+                    <div class='condition'>
+                        <span><b>品类：</b></span>
+                        {%for i in kinds%}
+                        <td> <input type='checkbox' name="{{i}}">{{i}}</td>
+                        {%endfor%}
+                    </div>
+                    
+                    <div class='condition'>
+                        <span><b>其他标签：</b></span>
+                        {%for i in others%}
+                        <td> <input type='checkbox' name="{{i}}">{{i}}</td>
+                        {%endfor%}
+                    </div>
+                    <div class='condition'>
+                        <span><b>排序方式：</b></span>
+                        
+                        <td> <input type='radio' name="sort" value="comprehensive,0.5">综合排序</td>
+                        <td> <input type='radio' name="sort"  value="default">相关度排序</td>
+                        <td> <input type='radio' name="sort"  value="score">用户满意度排序</td>
+                        <td> <input type='radio' name="sort"  value="price_i">价格升序</td>
+                        <td> <input type='radio' name="sort"  value="price_d">价格降序</td>
+                        <td> <input type='radio' name="sort" value="comprehensive">自定义排序: 产品质量</td>
+                        <input type="range" name="comprehensive" min="0" max="10">性价比                
+                    </div>
+                    <div class='condition'>
+                        <span><b>价格区间：￥</b></span>
+                    
+                        <input class="bound" type='text' name='lower-bound' placeholder="低"> - <input class="bound" type='text' name='upper-bound' placeholder="高">
+                    
+                    </div>
+                    </div>
+
+                    <!-- 搜索区域（搜索框, 搜索按钮, 以图搜图） -->
+                    <div class="searchbar">
+                        <input name="keyword" type="text" class="ipt" id="sec" autocomplete="off" placeholder="请输入要搜索的商品" value="{{keyword}}">
+                        <div class="imgsearch" onclick="window.open('/upload', '_self')"></div>
+                        <button class="btnSearch" type="submit" onclick="recordHist()">搜索</button>
+                    </div>
+                    <!-- 下拉数据区域 -->
+                    <div class="sj"></div>
+                </form>
+                <!-- <form action = "/upload" method = "GET" 
+                enctype = "multipart/form-data"> -->
+                <!-- </form>  -->
+            </div>
+        <div class="tag"> 
+        <div class="tag-item">
+            <div class="result">
+                全部结果 > <b>"{{ keyword }}"</b>
+            </div>
+            <div class="total">
+                共{{ total }}条
+            </div>
+        </div>
+        <!-- <div class="tag-item">
+            <b>品牌：</b>
+            {% for i in brand_i %}
+            {{ i }}
+            {% endfor %}
+            <b>品类：</b>{{ kind }} <b>其他标签：</b>{{other}} <b>排序方式：</b>{{ sort }} <b>价格区间：</b>￥{l} - {h}
+        </div> -->
+        </div>
+        <ul id="goods">
+            {% for ele in ans %}
+            <li>
+                <div class="photo">
+                    <a target="_blank" href="{{ ele.url }}" title="{{ ele.name }}">
+                        <img src="{{ ele.img }}" alt="图片不见了">
+                    </a>
+                </div>
+                <div class="price">￥{{ ele.price }}</div>
+                <div class="score">评分: {{ ele.score }}</div>
+                <a class="name" target="_blank" href="{{ ele.url }}" title="{{ ele.name }}">{{ ele.name }}</a>
+                <div class="shop"><span>{{ ele.platform }}</span>{{ ele.shop }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="page">
+            {% if current_page == 1 %}
+                <button class="invalid">&lt; 上一页</button>
+            {% else %}
+                <button class="nav" onclick="location='page={{ current_page - 1}}?keyword={{ keyword }}&sort={{ sort }}&lower-bound={{ l }}&upper-bound={{ h }}'">&lt; 上一页</button>
+            {% endif %}
+            {% for page in pages %}
+                {% if page == current_page %}
+                <button class="cpage">{{ page }}</button>
+                {% else %}
+                <button class="apage" onclick="location='page={{ page }}?keyword={{ keyword }}&sort={{ sort }}&lower-bound={{ l }}&upper-bound={{ h }}'">{{ page }}</button>
+                {% endif %}
+            {% endfor %}
+            {% if current_page == 10 %}
+                <button class="invalid">下一页 &gt;</button>
+            {% else %}
+                <button class="nav" onclick="location='page={{ current_page + 1}}?keyword={{ keyword }}&sort={{ sort }}&lower-bound={{ l }}&upper-bound={{ h }}'">下一页 &gt;</button>
+            {% endif %}
+        </div>
+        <div class="right-wrap">
+            <button class="top" title="回到顶部" onclick="location='#top'">▲</button>
+            <button class="homepage" onclick="location='/'">首页</button>
+        </div>
+        <!-- js核心文件 -->
+        <script>
+            var timer = null
+            var obj = {}
+            // 定义防抖功能
+            function fd(text) {
+            timer = setTimeout(function () {
+                getData(text)
+            }, 600)
+            }
+
+            $('.ipt').on('keyup', function (e) {
+            clearInterval(timer)
+            var text = $(this).val().trim()
+            if (text.length <= 0) {
+                return $('.sj').empty().css('display', 'none')
+            }
+            if (obj[text]) {
+                return xrData(obj[text])
+            }
+            fd(text)
+            })
+
+            $('.sj').on('click', '.sj-list', function () {
+            $('.ipt').val($(this).text())
+            $('.sj').css('display', 'none')
+            })
+
+            // 获取数据
+            function getData(text) {
+            $.ajax({
+                url: 'https://suggest.taobao.com/sug',
+                data: { q: text },
+                dataType: 'jsonp',
+                success: function (res) {
+                xrData(res)
+                }
+            })
+            }
+
+            // 渲染数据
+            function xrData(res) {
+            if (res.result.length <= 0) {
+                $('.sj').empty()
+                $('.sj').css('display', 'none')
+                return
+            }
+            var strHtml = ""
+            var div1 = '<div class="sj-list">'
+            var div2 = '</div>'
+            $.each(res.result, function(i,feature) {
+                strHtml += div1+feature[0]+div2
+            })
+            $('.sj').empty().html(strHtml)
+            $('.sj').css('display', 'block')
+
+            var k = $('.ipt').val().trim()
+            obj[k] = res
+            }
+
+
+        </script>
+
+        <script>
+        var ItemName = "";
+        var menuHistory   = new Object();
+        initlocalStorage();
+        $(function(){
+            console.log(1111111111111111);
+            initLocalStorageArg("hi_001");
+            console.log(ItemName);
+        
+        
+        });
+        
+            $(document).delegate(".sj-list","click",function(){
+            $("#sec").val($(this).text());
+            });
+            //清除记录功能
+            // $(".sj>button").click(function(){
+            $(document).delegate("#btnEmpty","click",function(){
+            localStorage.setItem( ItemName,JSON.stringify([]));
+            initlocalStorage();
+            showHistDom();
+            event.stopPropagation();
+            });
+        
+            /**
+             * 历史数据展示
+             */
+            function showHistDom(){
+            if (menuHistory.length <= 0){
+                $('.sj').empty()
+                $('.sj').css('display', 'none')
+                return
+            }
+            $(".sj").html("");
+            for(  var i=0 ; i<menuHistory.length;i++){
+                $(".sj").append('<div class="sj-list">'+menuHistory[i]+'</div>')
+            }
+            $(".sj").append('<div id="btnEmpty">'+"删除历史记录"+'</div>')       
+            $('.sj').css('display', 'block')  
+            }
+        
+        
+        /**
+         * 获取指定的localStorageobj对象，并转成Array对象。
+         */
+        function initlocalStorage(){
+            var localStorageobj = localStorage.getItem(ItemName);
+            if(localStorageobj){
+            }else{
+            localStorage.setItem( ItemName,"[]");
+            localStorageobj = localStorage.getItem(ItemName);
+            }
+            menuHistory=JSON.parse( localStorageobj);
+        }
+        
+        /**
+         * 执行记录历史数据
+         */
+        function recordHist(){
+            initlocalStorage();
+            var value = $("#sec").val();
+        
+            //输入的内容localStorage有记录
+                if($.inArray(value,menuHistory)>=0){
+                var keyval = Object.keys(menuHistory).filter(function(x){return menuHistory[x] == value}).toString() ;
+                menuHistory.splice(Number(keyval), 1);
+                }else {
+                if (menuHistory.length > 9) {
+                    menuHistory.pop();
+                }else {
+                }
+                }
+                menuHistory.unshift(value);
+                localStorage.removeItem(ItemName);
+                localStorage.setItem( ItemName,JSON.stringify(menuHistory)); 
+        }
+        
+        $(".ipt").click(function(){
+            var value = $("#sec").val();
+            if (value=="") {
+            showHistDom();
+            }
+            event.stopPropagation()
+    }); 
+
+    $(".ipt#btnEmpty").click(function(){
+        localStorage.setItem( ItemName,JSON.stringify([]));
+        initlocalStorage();
+        showHistDom();
+        event.stopPropagation();
+        }); 
+        
+        
+        /*执行搜索的一种方式，绑定回车键*/
+            $("#sec").on("keypress",function(e){
+            var keycode=e.keyCode;
+            if(keycode=='13'){
+                recordHist();
+            }
+            });
+            
+        </script>
+    <script>
+        $("body").click(function(){
+            $('.sj').empty();
+            $('.sj').css('display', 'none')
+        });
+        </script>
+    </body>
+</html>

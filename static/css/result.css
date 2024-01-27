@@ -1,0 +1,322 @@
+div.title {
+    color: #f30213;
+    font-size: 40px;
+    padding-right: 20px;
+}
+div.title img {
+    width: 80px;
+}
+div.homepage {
+    top: 30px;
+    width: 1400px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.searchbar {
+    display: flex;
+    justify-content: center;
+    width: 620px;
+    height: 40px;
+}
+div.searchbar input {
+    background-color: #F6F7F8;
+    padding-left: 15px;
+    min-width: 480px;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    border: 1px solid #E3E5E7;
+    border-right-color: #f30213;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition-duration: 0.3s;
+}
+div.searchbar input:hover {
+    outline: none;
+    background-color: white;
+}
+div.searchbar input:focus {
+    outline: none;
+    border-top-color: #f30213;
+    border-bottom-color: #f30213;
+    border-left-color: #f30213;
+    background-color: white;
+}
+div.searchbar button {
+    width: 70px;
+    background-color: #f30213;
+    color: white;
+    border: 1px solid transparent;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    text-align: center;
+    transition-duration: 0.3s;
+}
+div.searchbar button:hover {
+    background-color: red;
+    cursor: pointer;
+}
+div.sj {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 600px;
+    border: 1px solid #cccccc;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 5px;
+    padding-left: 7px;
+    border-top: 0;
+}
+div.sj-list {
+    padding-left: 15px;
+    line-height: 35px;
+    font-size: 14px;
+    border-bottom: 1px solid #dddddd;
+    color: #555555;
+    transition-duration: 0.2s;
+}
+div.sj-list:hover {
+    cursor: pointer;
+    color: #f30213;
+}
+div.sj > #btnEmpty {
+    color: gray;
+    background-color:white;
+    border:none;
+    position:relative;
+    left:510px;
+    padding-top:7px;
+    padding-bottom:7px;
+    border:none;
+    background-color:transparent;
+    color:gray;
+    font-size:8px;
+}
+div.sj > #btnEmpty:hover {
+    cursor: pointer;
+}
+div.result {
+    display: inline-block;
+    font-size: 15px;
+    padding-left: 100px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+div.total {
+    display: inline-block;
+    text-align: center;
+    font-size: 14px;
+    color: #999999;
+}
+ul {
+    list-style: none;
+    width: 1320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 220px;
+    height: 360px;
+    padding: 10px;
+    margin: 0 10px;
+}
+li:hover {
+    box-shadow: 2px 2px 5px #bbbbbb;
+}
+div.catagory span{
+    display: flex;
+    background-color: grey;
+    width: 1320px;
+    height: 300px;
+ }
+div.photo {
+    align-self: center;
+    width: 220px;
+    height: 220px;
+}
+img {
+    width: 100%;
+    height: 100%;
+}
+div.price {
+    padding: 10px 0 5px 0;
+    font-family: "Consolas";
+    color: #e4393c;
+    font-size: 20px;
+}
+div.shop {
+    padding-top: 5px;
+    color: #999999;
+    font-size: 12px;
+}
+div.score {
+    font-family: "Consolas";
+    font-size: 12px;
+    font-style: italic;
+    color: #999999;
+}
+div.shop span {
+    display: inline-block;
+    background-color: #e23a3a;
+    color: white;
+    font-size: 12px;
+    width: 32px;
+    text-align: center;
+    margin-right: 5px;
+    border: 1px solid #e23a3a;
+    border-radius: 3px;
+}
+a.name {
+    padding-top: 5px;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    line-height: 1.5;
+    color: #666666;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+a.name:hover {
+    color: #e23a3a;
+}
+div.page {
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px auto 50px;
+}
+button.apage {
+    height: 38px;
+    width: 38px;
+    font-size: 14px;
+    color: #666666;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    background-color: white;
+    transition-duration: 0.3s;
+}
+button.apage:hover, .nav:hover, .top:hover {
+    cursor: pointer;
+    border: 1px solid #f30213;
+    color: #f30213;
+}
+button.cpage {
+    height: 38px;
+    width: 38px;
+    font-size: 14px;
+    border: 1px solid #f30213;
+    border-radius: 5px;
+    background-color: #f30213;
+    color: white;
+}
+button.nav {
+    height: 38px;
+    width: 85px;
+    font-size: 14px;
+    color: #666666;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    background-color: white;
+    transition-duration: 0.3s;
+}
+button.invalid {
+    height: 38px;
+    width: 85px;
+    font-size: 14px;
+    color: #cccccc;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: white;
+}
+button.invalid:hover {
+    cursor: not-allowed;
+}
+div.right-wrap {
+    position: fixed;
+    right: 10px;
+    bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 40px;
+    height: 90px;
+}
+div.right-wrap button {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: #666666;
+    border: 1px solid #666666;
+    border-radius: 5px;
+    background-color: white;
+    transition-duration: 0.3s;
+}
+button.top {
+    font-size: 20px;
+}
+button.homepage {
+    font-size: 10px;
+}
+div.condition {
+    padding: 0 12px 15px 12px;
+}
+div.condition span {
+    color: #f30213;
+    /* font-family: "STZhongsong"; */
+}
+div.condition input.bound {
+    width: 50px;
+    height: 20px;
+    border: 1px solid #E3E5E7;
+    border-radius: 3px;
+    font-size: 6px;
+}
+div.condition input.bound:hover {
+    outline: none;
+}
+div.condition input.bound:focus {
+    outline: none;
+    border-color: #f30213;
+    background-color: white;
+}
+div.imgsearch {
+    height: 38px;
+    width: 40px;
+    background-color: #f6f7f8;
+    background-image: url("../img/imgsearch_default.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 25px 25px;
+    border: 1px solid #f30213;
+    border-left: none;
+    border-right: none;
+    transition-duration: 0.3s;
+}
+div.imgsearch:hover {
+    cursor: pointer;
+    background-color: white;
+    background-image: url("../img/imgsearch_hover.png");
+}
+#brands {
+    display: flex;
+}
+img.brand {
+    width: 90px;
+}

@@ -1,0 +1,64 @@
+h1 {
+   color: #f30213;
+   font-family: "STZhongsong";
+   font-size: 40px;
+   letter-spacing: 4px;
+}
+div.container {
+   position: relative;
+   margin: auto;
+   top: 300px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+/* input {
+   height: 40px;
+   background-color: #f30213;
+   color: white;
+   border: 1px solid transparent;
+   border-radius: 5px;
+   font-family: "Microsoft YaHei";
+   font-size: 16px;
+   text-align: center;
+   transition-duration: 0.3s;
+} */
+input.submit {
+   height: 40px;
+   background-color: #f30213;
+   color: white;
+   border: 1px solid transparent;
+   border-radius: 5px;
+   font-family: "Microsoft YaHei";
+   font-size: 16px;
+   text-align: center;
+   transition-duration: 0.3s;
+}
+input[type="file"] {
+    cursor: pointer !Important;
+}
+input[type="file"]::-webkit-file-upload-button {
+    background: #fe0000;
+    border: 0;
+    padding: 0.6em 0.3em;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+}
+input[type="file"]::-ms-browse {
+    background: #ff0055;
+    border: 0;
+    padding: 1em 2em;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+   
+}
+input.file{
+    font-family: "Microsoft YaHei";
+    font-size: 16px;
+    background-color: #F6F7F8;
+}
